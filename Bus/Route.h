@@ -10,9 +10,10 @@ public:
 
 	int getRId() const;
 	int getBusNumber() const;
+	void setBusNumber(int num) { _busNumber = num; }
 	string getDriver() const;
 	string getBrand() const;
-
+	bool operator==(const Route&) const;
 private:
 	int _routeID;
 	string _driver;
@@ -20,3 +21,8 @@ private:
 	string _busBrand;
 };
 
+inline ostream& operator<<(ostream& o ,const Route& rt)
+{
+	o << rt.getRId() << " " << rt.getDriver() << " " << rt.getBusNumber() << " " << rt.getBrand() << endl;
+	return o;
+}

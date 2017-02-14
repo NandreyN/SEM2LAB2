@@ -31,3 +31,9 @@ string Route::getBrand() const
 {
 	return _busBrand;
 }
+
+bool Route::operator==(const Route& another) const
+{
+	return (another.getRId() == _routeID && another.getBrand() == _busBrand
+		&& another.getBusNumber() == _busNumber && another.getDriver() == _driver);
+}
