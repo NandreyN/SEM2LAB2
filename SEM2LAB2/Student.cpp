@@ -82,7 +82,7 @@ void Student::parseAndInit(const std::string& line)
 	std::istringstream iss(line);
 	iss >> this->_surname;
 	iss >> this->_groupNumber;
-	//copy(istream_iterator<string>(iss), istream_iterator<string>(), back_inserter(this->_marks));
+
 	while (!iss.eof())
 	{
 		string mark;
