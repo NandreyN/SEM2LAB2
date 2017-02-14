@@ -143,9 +143,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Student.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="in.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\Документы\visual studio 2015\Projects\SEM2LAB2\stl №2.doc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Student.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
