@@ -1,0 +1,3 @@
+Tsaruk 2 7 8 9 10
+Linnik 11 4 4 9 9
+Poriadin 1 4 4 4 4
