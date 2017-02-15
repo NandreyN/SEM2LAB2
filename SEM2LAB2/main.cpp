@@ -8,6 +8,7 @@
 #include<algorithm>
 #include "Student.h"
 #include <map>
+#include<numeric>
 
 using namespace std;
 
@@ -30,6 +31,7 @@ int main()
 
 	sort(students.begin(), students.end(), [](const Student& st1, const Student& st2) {return st1 < st2; });
 
+	cout << "Input surname to remove : " << endl;
 	string surnameToRemove;
 	cin >> surnameToRemove;
 
@@ -56,18 +58,12 @@ int main()
 	int reqGroup;
 	cin >> reqGroup;
 	cout << "max : ";
+	
+	map<int, vector<Student>> groups;
+	for_each(students.begin(), students.end(), [&groups](const Student& st) {groups[st.getGroup()].push_back(st); });
 
-	iter stud = find_if(stMap.begin(), stMap.end(), [&reqGroup](const pair<string, Student>& pr) {return pr.second.getGroup() == reqGroup; });
-	//assert(stud != stMap.end());
-	iter bgn = stMap.begin();
-	while (bgn != stMap.end())
-	{
-		if (bgn->second.getGroup() == reqGroup)
-			if (bgn->second.getSum() > stud->second.getSum())
-				stud = bgn;
-		++bgn;
-	}
-	cout << stud->second;
+	vector<Student> stds = groups[reqGroup];
+	cout << *max_element(stds.begin(), stds.end(), [](const Student& st1, const Student& st2) {return st1.getSum() < st2.getSum(); });
 
 	in.close();
 	return 0;

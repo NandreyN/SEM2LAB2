@@ -86,13 +86,11 @@ int main()
 	cout << "Changed bus : " << target->second << endl;
 
 	//6ac a	найти маршрут с наибольшим количеством автобусов.
-	set<int> routes;
-	multimap<int, int> routesBuses;
-	for_each(routesVect.begin(), routesVect.end(), [&routesBuses](const Route& p) {routesBuses.insert(make_pair(p.getRId(), p.getBusNumber())); });
 
-	for_each(routesVect.begin(), routesVect.end(), [&routes](const Route& rt) {routes.insert(rt.getRId()); });
-	set<int>::iterator p = max_element(routes.begin(), routes.end(), [&routesBuses](int r1, int r2) {return routesBuses.count(r1) < routesBuses.count(r2); });
-	cout << "Route with max buses : " << *p << endl;
+	map<int, int> routesBuses;
+	for_each(routesVect.begin(), routesVect.end(), [&routesBuses](const Route& p) {routesBuses[p.getRId()]++; });
+	map<int,int>::iterator p = max_element(routesBuses.begin(), routesBuses.end(), [](auto pair1, auto pair2) {return pair1.second < pair2.second; });
+	cout << "Route with max buses : " << p->first << endl;
 
 	//c)	найти маршрут, на котором работают автобусы одной марки
 	map<int, vector<string>> routesBrands;
