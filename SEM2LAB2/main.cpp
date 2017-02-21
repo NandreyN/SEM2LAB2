@@ -8,8 +8,6 @@
 #include<algorithm>
 #include "Student.h"
 #include <map>
-#include<numeric>
-
 using namespace std;
 
 int main()
@@ -26,10 +24,12 @@ int main()
 		Student a(data);
 		students.push_back(a);
 	}
+	in.close();
 
 	assert(students.size() != 0);
 
 	sort(students.begin(), students.end(), [](const Student& st1, const Student& st2) {return st1 < st2; });
+	copy(students.begin(), students.end(), ostream_iterator<Student>(cout, "\n"));
 
 	cout << "Input surname to remove : " << endl;
 	string surnameToRemove;
@@ -65,6 +65,5 @@ int main()
 	vector<Student> stds = groups[reqGroup];
 	cout << *max_element(stds.begin(), stds.end(), [](const Student& st1, const Student& st2) {return st1.getSum() < st2.getSum(); });
 
-	in.close();
 	return 0;
 }

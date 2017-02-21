@@ -1,7 +1,7 @@
 Tsaruk 2 7 8 9 10
 Linnik 11 4 4 9 9
 Palpatin 1 4 4 4 4
-Frodo 2 3 4 9 10
+Kravchuk 2 3 4 9 10
 Afanasenko 5 1 8 9 10
 MAXin5 5 9 9 9 9
 MaxAll 4 10 10 10 10

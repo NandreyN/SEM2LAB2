@@ -59,21 +59,28 @@ int main()
 		if (pair.second.getRId() == reqRoute) cout << pair.second.getBusNumber() << endl;
 	});
 
-	//d
-	string reqBrand = "MAZ";
-	cout << endl << "Surnames of those who work with " << reqBrand << endl;
-	for_each(routesMap.begin(), routesMap.end(), [&reqBrand](pair<string, Route> pair)
+	//d	вывести список всех водителей, работающих на одной марке автобуса;
+	cout << endl << "One brand : " << endl;
+	map<string, set<string>> mapDrivers;
+	for_each(routesVect.begin(), routesVect.end(), [&mapDrivers](const Route& rt)
 	{
-		if (pair.second.getBrand() == reqBrand) cout << pair.second.getDriver() << endl;
+		mapDrivers[rt.getDriver()].insert(rt.getBrand());
 	});
+	
+	for_each(mapDrivers.begin(), mapDrivers.end(), [&mapDrivers] (pair<string, set<string>> pair)
+	{
+		if (pair.second.size() == 1) cout << pair.first << endl;
+	});
+	cout << endl;
 
 	//5ac
 	typedef multimap<string, Route>::iterator mapIter;
 	mapIter target;
-	Route toDel("Morozov", "MAZ", 101,22);
+	Route toDel("Krilov", "MAZ", 101,22);
 	target = find_if(routesMap.begin(), routesMap.end(), [&toDel](pair<string, Route> pair) {return  pair.second == toDel; });
 	if (target != routesMap.end())
 		routesMap.erase(target);
+
 	cout << "Without deleted bus : " << endl;
 	for_each(routesMap.begin(), routesMap.end(), [](pair<string, Route> pair) {cout << pair.second; });
 
@@ -83,7 +90,8 @@ int main()
 	if (target != routesMap.end())
 		target->second.setBusNumber(changeTo);
 
-	cout << "Changed bus : " << target->second << endl;
+	cout << "Changed bus : " << endl;
+	for_each(routesMap.begin(), routesMap.end(), [](pair<string, Route> pair) {cout << pair.second; });
 
 	//6ac a	найти маршрут с наибольшим количеством автобусов.
 
@@ -93,19 +101,16 @@ int main()
 	cout << "Route with max buses : " << p->first << endl;
 
 	//c)	найти маршрут, на котором работают автобусы одной марки
-	map<int, vector<string>> routesBrands;
+
+	map<int, set<string>> routesBrands;
 	for_each(routesVect.begin(), routesVect.end(), [&routesBrands](const Route& p)
 	{
-		//routesBrands[p.getRId()] = vector<string>();
-		routesBrands[p.getRId()].push_back(p.getBrand());
+		routesBrands[p.getRId()].insert(p.getBrand());
 	});
-	
-	cout << "Routes with equal buses brands : " << endl;
-	for_each(routesBrands.begin(), routesBrands.end(), [](pair<int, vector<string>> pair)
+
+	for_each(routesBrands.begin(), routesBrands.end(), [](pair<int, set<string>> pair)
 	{
-		vector<string> vect = pair.second;
-		sort(vect.begin(), vect.end());
-		if (vect[0] == vect[vect.size()-1]) cout << pair.first << endl;
+		if (pair.second.size() == 1) cout << pair.first << endl;
 	});
 	return 0;
 }
